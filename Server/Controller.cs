@@ -64,6 +64,13 @@ namespace Server
             {
                 users.Remove(user);
                 frmServer.RefreshTable();
+                foreach(ClientHandler handler in clients)
+                {
+                    if(user.Id == handler.LoggedInUser.Id)
+                    {
+                        handler.Close();
+                    }
+                }
                 return true;
 
             }

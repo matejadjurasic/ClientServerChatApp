@@ -26,6 +26,11 @@ namespace Server
             sender = new Sender(socket);
             receiver = new Receiver(socket);
         }
+        public void Close()
+        {
+            kraj = true;
+            //socket.Close();
+        }
 
         public void HandleRequest()
         {

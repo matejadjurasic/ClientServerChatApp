@@ -61,7 +61,7 @@ namespace Client
             if (r.Exception == null)
             {
                 Dispose();
-                frmLogin.Visible = true;
+                //frmLogin.Visible = true;
                 Communication.Instance.StopListening();
             }
             else

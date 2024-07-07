@@ -16,6 +16,7 @@ namespace Server
     {
         private Socket socket;
         private int maxClients = int.Parse(ConfigurationManager.AppSettings["max_broj_klijenata"]);
+        private bool isRunning;
         public Server() 
         {
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -27,7 +28,7 @@ namespace Server
 
             socket.Bind(endPoint);
             socket.Listen(maxClients);
-
+            isRunning = true;
             Thread thread = new Thread(AcceptClient);
             thread.Start();
         }
@@ -36,7 +37,7 @@ namespace Server
         {
             try 
             {
-                while (true)
+                while (isRunning)
                 {
                     Socket clientSocket = socket.Accept();
                     ClientHandler handler = new ClientHandler(clientSocket);
@@ -55,6 +56,7 @@ namespace Server
 
         public void Stop()
         {
+            isRunning = false;
             socket.Close();
         }
     }
