@@ -72,7 +72,7 @@ namespace DBBroker
             }
             catch(Exception ex) 
             {
-                return false;
+                throw ex;
             }
         }
 
@@ -104,6 +104,39 @@ namespace DBBroker
                 Debug.WriteLine(ex.Message);
                 throw ex;
             }finally { reader.Close(); }
+        }
+
+        public bool SendAll(List<Message> msgs)
+        {
+            foreach(Message msg in msgs)
+            {
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText = $"insert into message(text,senderID,receiverID,dateTime) values ('{msg.Text}',{msg.Sender.Id},{msg.Receiver.Id},CURRENT_TIMESTAMP)";
+                try
+                {
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            return true;
+        }
+
+        public bool AddUser(User user)
+        {
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = $"insert into users values('{user.Username}','{user.Password}')";
+            try
+            {
+                command.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

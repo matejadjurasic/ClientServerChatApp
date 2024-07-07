@@ -69,5 +69,16 @@ namespace Server
         {
             selectedUser = lstUsers.SelectedItem as User;
         }
+
+        private void btnAddUser_Click(object sender, EventArgs e)
+        {
+            FrmAddUser addUser = new FrmAddUser();
+            addUser.ShowDialog();
+        }
+
+        private void FrmServer_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

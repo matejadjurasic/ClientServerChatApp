@@ -40,6 +40,9 @@ namespace Client
             this.label4 = new System.Windows.Forms.Label();
             this.lstUsers = new System.Windows.Forms.ListBox();
             this.lstMessages = new System.Windows.Forms.ListView();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lblUser = new System.Windows.Forms.Label();
+            this.btnSendAll = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnLogout
@@ -134,11 +137,41 @@ namespace Client
             this.lstMessages.TabIndex = 11;
             this.lstMessages.UseCompatibleStateImageBehavior = false;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(303, 13);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(81, 16);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Current user:";
+            // 
+            // lblUser
+            // 
+            this.lblUser.AutoSize = true;
+            this.lblUser.Location = new System.Drawing.Point(306, 47);
+            this.lblUser.Name = "lblUser";
+            this.lblUser.Size = new System.Drawing.Size(0, 16);
+            this.lblUser.TabIndex = 13;
+            // 
+            // btnSendAll
+            // 
+            this.btnSendAll.Location = new System.Drawing.Point(186, 161);
+            this.btnSendAll.Name = "btnSendAll";
+            this.btnSendAll.Size = new System.Drawing.Size(75, 30);
+            this.btnSendAll.TabIndex = 14;
+            this.btnSendAll.Text = "Send all";
+            this.btnSendAll.UseVisualStyleBackColor = true;
+            this.btnSendAll.Click += new System.EventHandler(this.btnSendAll_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 542);
+            this.Controls.Add(this.btnSendAll);
+            this.Controls.Add(this.lblUser);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.lstMessages);
             this.Controls.Add(this.lstUsers);
             this.Controls.Add(this.label4);
@@ -169,6 +202,9 @@ namespace Client
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListBox lstUsers;
         private ListView lstMessages;
+        private Label label5;
+        private Label lblUser;
+        private Button btnSendAll;
 
         public ListBox LstUsers { get => lstUsers; set => lstUsers = value; }
     }

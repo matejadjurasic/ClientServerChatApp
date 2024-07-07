@@ -39,6 +39,7 @@ namespace Server
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lstUsers = new System.Windows.Forms.ListBox();
+            this.btnAddUser = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -124,11 +125,22 @@ namespace Server
             this.lstUsers.TabIndex = 9;
             this.lstUsers.SelectedIndexChanged += new System.EventHandler(this.lstUsers_SelectedIndexChanged);
             // 
+            // btnAddUser
+            // 
+            this.btnAddUser.Location = new System.Drawing.Point(42, 288);
+            this.btnAddUser.Name = "btnAddUser";
+            this.btnAddUser.Size = new System.Drawing.Size(121, 30);
+            this.btnAddUser.TabIndex = 10;
+            this.btnAddUser.Text = "Make new user";
+            this.btnAddUser.UseVisualStyleBackColor = true;
+            this.btnAddUser.Click += new System.EventHandler(this.btnAddUser_Click);
+            // 
             // FrmServer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(704, 450);
+            this.Controls.Add(this.btnAddUser);
             this.Controls.Add(this.lstUsers);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -140,6 +152,7 @@ namespace Server
             this.Controls.Add(this.label1);
             this.Name = "FrmServer";
             this.Text = "Server";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmServer_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -156,7 +169,7 @@ namespace Server
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private ListBox lstUsers;
-
+        private Button btnAddUser;
     }
 }
 

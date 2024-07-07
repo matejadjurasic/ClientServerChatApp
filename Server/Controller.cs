@@ -109,5 +109,56 @@ namespace Server
             }finally { broker.CloseConnection(); }
         }
 
+        public bool SendAll(Message msg)
+        {
+            List<Message> msgs = new List<Message>();
+            foreach(User user in users)
+            {   
+                if(msg.Sender.Id != user.Id)
+                {
+                    Message message = new Message
+                    {
+                        Text = msg.Text,
+                        Sender = msg.Sender,
+                        Receiver = user,
+                    };
+                    Debug.WriteLine(message.Receiver.Username);
+                    msgs.Add(message);
+                }
+            }
+            try
+            {
+                broker.OpenConnection();
+                broker.BeginTransaction();
+                broker.SendAll(msgs);
+                broker.Commit();
+                return true; 
+            }
+            catch (Exception ex)
+            {
+                broker.Rollback();
+                throw ex;
+            }
+            finally { broker.CloseConnection(); }
+        }
+
+        internal bool AddUser(User user)
+        {
+            try
+            {
+                broker.OpenConnection();
+                broker.BeginTransaction();
+                broker.AddUser(user);
+                broker.Commit();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                broker.Rollback();
+                Debug.Write(ex.Message);
+                return false;
+            }
+            finally { broker.CloseConnection(); }
+        }
     }
 }

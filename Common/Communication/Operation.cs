@@ -13,5 +13,6 @@ namespace Common.Communication
         UpdateTable,
         SendMessage,
         GetMessages,
+        SendAll,
     }
 }

@@ -77,6 +77,9 @@ namespace Server
                     case Operation.GetMessages:
                         r.Result = Controller.Instance.GetMessages((User)req.Argument);
                         break;
+                    case Operation.SendAll:
+                        r.Result = Controller.Instance.SendAll((Message)req.Argument);
+                        break;
                 }
             }
             catch (Exception ex)

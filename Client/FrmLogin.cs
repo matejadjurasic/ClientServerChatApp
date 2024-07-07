@@ -39,5 +39,11 @@ namespace Client
                 MessageBox.Show("Error logging in");
             }
         }
+
+        private void FrmLogin_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Communication.Instance.Close();
+            Application.Exit();
+        }
     }
 }

@@ -52,6 +52,12 @@ namespace Client
             frmLogin = frm;
         }
 
+        public void Close()
+        {
+            StopListening();
+            socket.Close();
+        }
+
         public void StartListening(FrmMain frm)
         {
             frmMain = frm;
@@ -138,6 +144,18 @@ namespace Client
             {
                 Argument = msg,
                 Operation = Operation.SendMessage
+            };
+            sender.Send(req);
+            Response r = (Response)receiver.Receive();
+            return r;
+        }
+
+        internal Response SendAll(Message msg)
+        {
+            Request req = new Request
+            {
+                Argument = msg,
+                Operation = Operation.SendAll
             };
             sender.Send(req);
             Response r = (Response)receiver.Receive();

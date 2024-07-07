@@ -30,6 +30,7 @@ namespace Client
             lstMessages.Columns.Add("Username", 150, HorizontalAlignment.Left);
             lstMessages.Columns.Add("Text", 250, HorizontalAlignment.Left);
             lstMessages.Columns.Add("DateTime", 150, HorizontalAlignment.Left);
+            lblUser.Text = user.Username;
             Communication.Instance.StartListening(this);
         }
 
@@ -40,7 +41,7 @@ namespace Client
                 selectedUser = lstUsers.SelectedItem as User;
             }
         }
-
+        
         public void SetUsers()
         {
             if (InvokeRequired)
@@ -104,7 +105,10 @@ namespace Client
                     item.SubItems.Add(msg.DateTime.ToString());
                     lstMessages.Items.Add(item);
                 }
-                txtLastMessage.Text = Communication.Instance.Messages[0].Sender.Username + "\n"+ Communication.Instance.Messages[0].Text;
+                if (Communication.Instance.Messages.Count > 0)
+                {
+                    txtLastMessage.Text = Communication.Instance.Messages[0].Sender.Username + "\n" + Communication.Instance.Messages[0].Text;
+                }
             }
 
         }
@@ -123,6 +127,23 @@ namespace Client
         {
             Communication.Instance.Logout(user);
             Communication.Instance.StopListening();
+        }
+
+        private void btnSendAll_Click(object sender, EventArgs e)
+        {
+            Message msg = new Message();
+            msg.Text = txtMessage.Text;
+            msg.Sender = user;
+            Response r = Communication.Instance.SendAll(msg);
+            if (r.Exception == null && (bool)r.Result == true)
+            {
+                MessageBox.Show("Success!");
+                txtMessage.Text = "";
+            }
+            else
+            {
+                MessageBox.Show("Something went wrong");
+            }
         }
     }
 }
